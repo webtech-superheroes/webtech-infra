@@ -1,0 +1,14 @@
+server {
+        listen 104.248.249.166:3001;
+        listen 104.248.249.166:8080;
+        
+        server_name {username}.app.webtech-superheroes.net;
+
+        location / {
+                proxy_pass http://{server_ip}:$server_port;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+        }
+
+}

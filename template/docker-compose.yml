@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  ide:
+    image: theiaide/theia-full:next
+    volumes:
+      - ./project:/home/project
+    ports:
+      - "{server_ip}:3000:3000"
+      - "{server_ip}:3001:3001"
+      - "{server_ip}:8080:8080"
+    networks:
+      - app-network
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  ide-project:
