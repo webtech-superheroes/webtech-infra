@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ide:
-    image: theiaide/theia-full:next
+    image: theiaide/theia:next
     volumes:
       - ./project:/home/project
     ports:
